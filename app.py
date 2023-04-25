@@ -17,6 +17,7 @@ sharpen_kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
 
 
 
+
 # Define a function to apply the selected filter/kernel to the input image
 def apply_filter(image, filter_type):
     filtered_image = image
