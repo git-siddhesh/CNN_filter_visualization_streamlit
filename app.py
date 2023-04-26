@@ -27,7 +27,7 @@ def apply_filter(image, filter_type):
         kernel_size = 3
         if filter_type == 'Gaussian Blur':
             # Add a selection for kernel size
-            kernel_size = st.sidebar.slider('Select Kernel Size', 1, 10, 3)
+            kernel_size = st.sidebar.slider('Select Kernel Size', min_value = 1, max_value=49, value=3, step=2)
         filtered_image = cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
     elif filter_type == 'Sobel X':
         filtered_image = cv2.filter2D(image, -1, sobel_x_kernel)
@@ -105,7 +105,7 @@ if uploaded_file is not None:
     # image = cv2.imread()
 
     # Show the original image
-    st.image(image, caption='Original Image', width=300)
+    # st.image(image, caption='Original Image', width=300)
 
     # Get the user-selected filter/kernel
     filter_type = st.sidebar.selectbox('Select Filter/Kernel', ['Original', 'Grayscale', 'Gaussian Blur','Sobel', 'Sobel X', 'Sobel Y', 'Vertical Lines', 'Horizontal Lines', 'Sharpen'])
@@ -116,8 +116,9 @@ if uploaded_file is not None:
     else:
         filtered_image = image
 
-    st.image(image, caption='Uploaded Image.')
-    st.image(filtered_image, caption='Filtered Image.')
+    st.image([image, filtered_image], caption=['Input Image', filter_type], width=300)
+    # st.image(image, caption='Uploaded Image.')
+    # st.image(filtered_image, caption='Filtered Image.')
 else:
     st.write('No image file uploaded.') 
 
